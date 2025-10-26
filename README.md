@@ -13,22 +13,35 @@ You will:
 
 ## Getting Started
 
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Install dependencies:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/PLP-MERN-Stack-Development/express-js-server-side-framework-Favgirlfr.git
    ```
+2. Navigate to the project directory:
+   ```bash
+   cd express-js-server-side-framework-Favgirlfr
+   ```
+3. Install dependencies:
+   ```bash
    npm install
    ```
-4. Run the server:
+4. Create a `.env` file based on `.env.example`:
+   ```bash
+   cp .env.example .env
    ```
+5. Run the server:
+   ```bash
    npm start
    ```
 
-## Files Included
+## Project Structure
 
-- `Week2-Assignment.md`: Detailed assignment instructions
-- `server.js`: Starter Express.js server file
-- `.env.example`: Example environment variables file
+- `server.js`: Main Express.js server file
+- `Week2-Assignment.md`: Detailed assignment instructions and requirements
+- `.env`: Environment variables configuration (create from .env.example)
+- `.env.example`: Example environment variables template
+- `package.json`: Project dependencies and scripts
+- `node_modules/`: Installed dependencies
 
 ## Requirements
 
@@ -38,25 +51,74 @@ You will:
 
 ## API Endpoints
 
-The API will have the following endpoints:
+The API supports the following endpoints:
 
-- `GET /api/products`: Get all products
-- `GET /api/products/:id`: Get a specific product
-- `POST /api/products`: Create a new product
-- `PUT /api/products/:id`: Update a product
-- `DELETE /api/products/:id`: Delete a product
+### Products
+
+- `GET /api/products`
+  - Get all products
+  - Supports query parameters for filtering and pagination:
+    - `page`: Page number (default: 1)
+    - `limit`: Items per page (default: 10)
+    - `search`: Search products by name or description
+    - `sort`: Sort by field (e.g., 'price', 'name')
+
+- `GET /api/products/:id`
+  - Get a specific product by ID
+
+- `POST /api/products`
+  - Create a new product
+  - Requires authentication
+  - Request body example:
+    ```json
+    {
+      "name": "Product Name",
+      "description": "Product Description",
+      "price": 99.99,
+      "category": "Category Name"
+    }
+    ```
+
+- `PUT /api/products/:id`
+  - Update an existing product
+  - Requires authentication
+  - Request body: Same as POST, all fields optional
+
+- `DELETE /api/products/:id`
+  - Delete a product
+  - Requires authentication
+
+## Authentication
+
+Protected endpoints require a valid JWT token in the Authorization header:
+```
+Authorization: Bearer <your_jwt_token>
+```
+
+## Error Handling
+
+The API uses standard HTTP status codes and returns error messages in the following format:
+```json
+{
+  "status": "error",
+  "message": "Error description",
+  "code": 400
+}
+```
 
 ## Submission
 
-Your work will be automatically submitted when you push to your GitHub Classroom repository. Make sure to:
+Your work will be automatically submitted when you push to the repository. Ensure:
 
-1. Complete all the required API endpoints
-2. Implement the middleware and error handling
-3. Document your API in the README.md
-4. Include examples of requests and responses
+1. All API endpoints are implemented and tested
+2. Middleware and error handling are in place
+3. API documentation is complete
+4. Test coverage for main functionality
+5. Environment variables are properly configured
 
 ## Resources
 
 - [Express.js Documentation](https://expressjs.com/)
 - [RESTful API Design Best Practices](https://restfulapi.net/)
-- [HTTP Status Codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) 
+- [HTTP Status Codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
+- [JWT Authentication](https://jwt.io/) 
